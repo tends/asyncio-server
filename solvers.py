@@ -32,13 +32,21 @@ async def cat(file_name):
         return "S \n" + contents
 
 
-async def sum():
+async def sum(args):
     """
-    TODO: Суммирование всех параметров:
+    Суммирование всех параметров:
     sum 1 2 3 ... 4 5 (неограниченное число параметров) -> S <СУММА>
     Пауза:
     """
-    pass
+
+    result = 0
+    try:
+        for each in  (map(int, args)):
+            result += int(each)
+    except Exception as e:
+        return "E %s" % e
+    else:
+        return "S " + str(result)
 
 
 async def sleep(msg):
