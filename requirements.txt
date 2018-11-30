@@ -4,3 +4,4 @@ aiofiles
 aiocache
 ujson
 msgpack
+pytest
