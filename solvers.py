@@ -30,9 +30,9 @@ async def cat(file_name):
         async with aiofiles.open(file_name, mode='r') as f:
             contents = await f.read()
     except Exception as e:
-        return "cat file error %s" % e
+        return "E cat file error %s" % e
     else:
-        return "S \n" + contents
+        return "S " + contents
 
 
 async def sum(args):
