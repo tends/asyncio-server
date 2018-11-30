@@ -1,6 +1,9 @@
 import asyncio
 import aioping
 import aiofiles
+from aiocache import SimpleMemoryCache
+
+cache = SimpleMemoryCache()
 
 
 async def ping(host):
@@ -61,18 +64,30 @@ async def sleep(msg):
         return "S done"
 
 
-async  def set():
+async def set(args):
     """
-    TODO: Запись в глобальное хранилище (в памяти):
+    Запись в глобальное хранилище (в памяти):
     set <KEY> <VALUE> -> S <comment>, либо E <comment> если сохранить не удалось
     """
-    pass
+    try:
+        key = args[0]
+        value = args[1:]
+        res = await cache.set(key, value)
+    except Exception as e:
+        return "E %s" % e
+    else:
+        return "S %s" % res
 
 
-async def get():
+async def get(args):
     """
-    TODO: Получение значения из хранилища:
+    Получение значения из хранилища:
     get <KEY> -> S <VALUE> или E <comment> (если ключа нет)
     """
-    pass
+    try:
+        res = await cache.get(args[0])
+    except Exception as e:
+        return "E %s" % e
+    else:
+        return "S %s" % res if res is not None else "E %s" % res
 
