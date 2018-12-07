@@ -70,6 +70,8 @@ async def set_item(args):
     set <KEY> <VALUE> -> S <comment>, либо E <comment> если сохранить не удалось
     """
     try:
+        if len(args) < 2:
+            raise Exception('At least two arguments are expected: key and value')
         key = args[0]
         value = args[1:]
         res = await cache.set(key, value)
