@@ -13,7 +13,7 @@ async def ping(host):
     ping -> S pong
     """
     try:
-        delay = await aioping.ping(host) * 1000
+        delay = await aioping.ping(''.join(host)) * 1000
         print("Ping response in %s ms" % delay)
     except Exception as e:
         return "E ping exception: {}".format(e)
