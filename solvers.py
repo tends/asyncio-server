@@ -27,7 +27,7 @@ async def cat(file_name):
     cat <FILENAME> -> S <DATA> или E <comment> если файла нет (или ошибка чтения)
     """
     try:
-        async with aiofiles.open(file_name, mode='r') as f:
+        async with aiofiles.open(''.join(file_name), mode='r') as f:
             contents = await f.read()
     except Exception as e:
         return "E cat file error %s" % e
