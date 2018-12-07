@@ -31,8 +31,7 @@ async def handle_echo(reader, writer):
 
         print(f"Received {message!r} from {addr!r}")
 
-        print(f"Send: {message!r}")
-        writer.write((str(message) + "\n").encode('utf-8'))#data)
+        writer.write((str(message) + "\n").encode('utf-8'))
         await writer.drain()
 
     print("Close the connection")
