@@ -7,19 +7,24 @@ import solvers
 solvers_dict = {o[0]: o[1] for o in getmembers(solvers) if isfunction(o[1])}
 
 
+async def data_decode(data):
+    try:
+        parsed_msg = data.decode().split()
+    except Exception as e:
+        message = "Error {}".format(e)
+    else:
+        print(parsed_msg)
+        message = await solvers_dict[parsed_msg[0]](parsed_msg[1:]) \
+            if len(parsed_msg) >= 1 \
+               and parsed_msg[0] in solvers_dict \
+            else "E wrong parsed command {}".format(parsed_msg)
+    return message
+
+
 async def handle_echo(reader, writer):
     while not reader.at_eof():
         data = await reader.readline()
-        try:
-            parsed_msg = data.decode().split()
-        except Exception as e:
-            message = "Error {}".format(e)
-        else:
-            print(parsed_msg)
-            message = await solvers_dict[parsed_msg[0]](parsed_msg[1:]) \
-                if len(parsed_msg) >= 1 \
-                and parsed_msg[0] in solvers_dict \
-                else "E wrong parsed command {}".format(parsed_msg)
+        message = await data_decode(data)
 
         addr = writer.get_extra_info('peername')
 
