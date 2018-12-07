@@ -3,9 +3,12 @@ import pytest
 import os
 
 
-def test_ping():
+@pytest.mark.asyncio
+async def test_ping():
     """TODO:"""
-    assert True
+    res = await solvers.ping('8.8.8.8')
+    assert res.startswith('E ping exception: Operation not permitted - Note that ICMP messages can only be sent from '
+                          'processes running as root.') is True
 
 
 @pytest.mark.asyncio
