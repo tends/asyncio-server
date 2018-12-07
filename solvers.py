@@ -56,7 +56,7 @@ async def sleep_secs(msg):
     """sleep <SECONDS> -> S done (через <SECONDS> секунд)
     """
     try:
-        secs = int(msg)
+        secs = int(' '.join(msg))
     except Exception as e:
         return "E Error parse msg to seconds: {}".format(e)
     else:
