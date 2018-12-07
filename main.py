@@ -23,8 +23,9 @@ async def data_decode(data):
 
 async def handle_echo(reader, writer):
     while not reader.at_eof():
-        data = await reader.readline()
-        message = await data_decode(data)
+        message = await data_decode(
+            await reader.readline()
+        )
 
         addr = writer.get_extra_info('peername')
 
