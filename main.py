@@ -1,10 +1,16 @@
 #!/usr/bin/env python3.7
 
 import asyncio
-from inspect import getmembers, isfunction
 import solvers
 
-solvers_dict = {o[0]: o[1] for o in getmembers(solvers) if isfunction(o[1])}
+solvers_dict = {
+    'ping': solvers.ping,
+    'cat': solvers.cat_file,
+    'sum': solvers.sum_items,
+    'sleep': solvers.sleep_secs,
+    'set': solvers.set_item,
+    'get': solvers.get_item
+}
 
 
 async def data_decode(data):

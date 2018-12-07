@@ -21,7 +21,7 @@ async def ping(host):
         return "S pong"
 
 
-async def cat(file_name):
+async def cat_file(file_name):
     """
     Вывод файла с диска:
     cat <FILENAME> -> S <DATA> или E <comment> если файла нет (или ошибка чтения)
@@ -35,7 +35,7 @@ async def cat(file_name):
         return "S " + contents
 
 
-async def sum(args):
+async def sum_items(args):
     """
     Суммирование всех параметров:
     sum 1 2 3 ... 4 5 (неограниченное число параметров) -> S <СУММА>
@@ -52,7 +52,7 @@ async def sum(args):
         return "S " + str(result)
 
 
-async def sleep(msg):
+async def sleep_secs(msg):
     """sleep <SECONDS> -> S done (через <SECONDS> секунд)
     """
     try:
@@ -64,7 +64,7 @@ async def sleep(msg):
         return "S done"
 
 
-async def set(args):
+async def set_item(args):
     """
     Запись в глобальное хранилище (в памяти):
     set <KEY> <VALUE> -> S <comment>, либо E <comment> если сохранить не удалось
@@ -79,7 +79,7 @@ async def set(args):
         return "S %s" % res
 
 
-async def get(args):
+async def get_item(args):
     """
     Получение значения из хранилища:
     get <KEY> -> S <VALUE> или E <comment> (если ключа нет)
